@@ -50,21 +50,24 @@ let onClickSquare (_ : MouseEvent) i j =
     let selected = displayState.Selected
     let hasElement = state.Rooms.[i].[j].IsSome
     match (selected, hasElement) with
-    | None, false -> ignore 0
+    | None, false ->
+        let displayState1 = { displayState with Warn = None }
+        saveState displayState1
     | None, _ ->
-        let displayState1 = { displayState with Selected = Some (i,j) }
+        let displayState1 = { displayState with Selected = Some (i,j); Warn = None }
         saveState displayState1
     | Some s, _ ->
         let sx,sy = s
         if sx = i && sy = j then
-            let displayState1 = { displayState with Selected = None }
+            let displayState1 = { displayState with Selected = None; Warn = None }
             saveState displayState1
         else
             match tryMakeTurn state sx sy i j with
             | None ->
-                ignore 0
+                let displayState1 = { displayState with Warn = Some (i,j) }
+                saveState displayState1
             | Some state1 ->
-                let displayState1 = { displayState with State = state1; Selected = None; History = append [|state|] displayState.History }
+                let displayState1 = { displayState with State = state1; Selected = None; Warn = None; History = append [|state|] displayState.History }
                 saveState displayState1
     print()
 

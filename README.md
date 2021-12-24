@@ -1,6 +1,6 @@
-# Elevator Management
+# Amphipod
 
-This is a coding game based on a [Fable](https://fable.io/) framework.
+The game for [Advent of Code 2021. Day 23](https://adventofcode.com/2021/day/23) based on a [Fable](https://fable.io/) framework.
 There are several elevators. Sometimes passengers use them. Provide efficiency algo for elevator system
 
 ## Requirements
